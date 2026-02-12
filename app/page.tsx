@@ -1,6 +1,10 @@
 "use client"
 
-import { useState, useCallback, useMemo } from "react"
+import { useState, useCallback, useMemo, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useAuth } from "@/components/auth/auth-context"
+import { LoginPage } from "@/components/auth/login-page"
+import { ForgotPasswordPage } from "@/components/auth/forgot-password-page"
 // Shrim Creation POS - Main Page
 import { CustomerForm } from "@/components/pos/customer-form"
 import { ProductGrid } from "@/components/pos/product-grid"
@@ -19,7 +23,7 @@ function generateInvoiceNumber() {
   return `INV-${datePart}-${randomPart}`
 }
 
-export default function POSPage() {
+function POSContent() {
   const [customer, setCustomer] = useState<CustomerInfo>({ name: "", mobile: "" })
   const [cart, setCart] = useState<CartItem[]>([])
   const [invoice, setInvoice] = useState<InvoiceData | null>(null)
@@ -181,4 +185,39 @@ export default function POSPage() {
       </div>
     </main>
   )
+}
+
+export default function POSPage() {
+  const { isAuthenticated, isLoading } = useAuth()
+  const [showForgotPassword, setShowForgotPassword] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    // Listen for forgot password navigation event
+    const handleForgotPassword = () => {
+      setShowForgotPassword(true)
+    }
+    window.addEventListener("navigateForgot", handleForgotPassword)
+    return () => window.removeEventListener("navigateForgot", handleForgotPassword)
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    if (showForgotPassword) {
+      return <ForgotPasswordPage onBack={() => setShowForgotPassword(false)} />
+    }
+    return <LoginPage />
+  }
+
+  return <POSContent />
 }

@@ -4,6 +4,9 @@ export interface Product {
   price: number
   category: string
   sku: string
+  stock?: number
+  reorderLevel?: number
+  lastRestockDate?: Date
 }
 
 export interface CartItem {
@@ -12,8 +15,18 @@ export interface CartItem {
 }
 
 export interface CustomerInfo {
+  id?: string
   name: string
   mobile: string
+  email?: string
+  address?: string
+}
+
+export interface Customer extends CustomerInfo {
+  id: string
+  createdDate: Date
+  totalPurchases: number
+  totalAmount: number
 }
 
 export interface InvoiceData {
@@ -24,4 +37,8 @@ export interface InvoiceData {
   subtotal: number
   tax: number
   total: number
+  editedFrom?: string
+  isEdited?: boolean
+  customerId?: string
+  paymentMethod?: string
 }
