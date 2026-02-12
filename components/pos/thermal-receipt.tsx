@@ -3,7 +3,7 @@
 import Image from "next/image"
 import type { InvoiceData } from "@/lib/pos-types"
 
-const INVOICE_LOGO = "/shrim-invoice-logo.jpeg"
+const INVOICE_LOGO = "/nvoize-logo.png"
 
 interface ThermalReceiptProps {
   invoice: InvoiceData
@@ -22,10 +22,10 @@ export function ThermalReceipt({ invoice }: ThermalReceiptProps) {
         <div className="flex items-center gap-4">
           <Image
             src={INVOICE_LOGO}
-            alt="Shrim Creation"
-            width={140}
-            height={100}
-            className="h-auto w-[140px] object-contain"
+            alt="nVoize"
+            width={120}
+            height={120}
+            className="h-auto w-[120px] object-contain"
           />
         </div>
         <div className="text-right">
@@ -92,7 +92,7 @@ export function ThermalReceipt({ invoice }: ThermalReceiptProps) {
 
       {/* Footer */}
       <div className="mt-8 border-t border-[#eee] pt-4 text-center text-[11px] text-[#999]">
-        <div className="font-semibold text-[#000]">Thank you for shopping with Shrim Creation!</div>
+        <div className="font-semibold text-[#000]">Thank you for shopping with nVoize!</div>
         <div className="mt-1">No Exchange / No Refund</div>
       </div>
     </div>
@@ -141,7 +141,7 @@ export async function generateReceiptHTML(invoice: InvoiceData): Promise<string>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Invoice ${invoice.invoiceNumber} - Shrim Creation</title>
+  <title>Invoice ${invoice.invoiceNumber} - nVoize</title>
   <style>
     @page {
       size: A4;
@@ -247,7 +247,7 @@ export async function generateReceiptHTML(invoice: InvoiceData): Promise<string>
   <div class="invoice">
     <div class="header">
       <div class="logo">
-        ${logoSrc ? `<img src="${logoSrc}" alt="Shrim Creation" />` : `<div style="font-size:24px;font-weight:900;color:#6b2c3e;letter-spacing:2px;">SHRIM CREATION</div>`}
+        ${logoSrc ? `<img src="${logoSrc}" alt="nVoize" />` : `<div style="font-size:24px;font-weight:900;color:#6b2c3e;letter-spacing:2px;">nVoize</div>`}
       </div>
       <div>
         <div class="inv-label">INVOICE</div>
@@ -290,7 +290,7 @@ export async function generateReceiptHTML(invoice: InvoiceData): Promise<string>
     </div>
 
     <div class="footer">
-      <strong>Thank you for shopping with Shrim Creation!</strong><br>
+      <strong>Thank you for shopping with nVoize!</strong><br>
       No Exchange / No Refund
     </div>
   </div>

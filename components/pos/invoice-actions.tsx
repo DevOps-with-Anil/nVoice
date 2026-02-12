@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Printer, FileText, RotateCcw, PenLine } from "lucide-react"
+import { Printer, FileText, RotateCcw, PenLine, MessageCircle } from "lucide-react"
 import type { InvoiceData } from "@/lib/pos-types"
 import { generateReceiptHTML } from "./thermal-receipt"
 
@@ -72,6 +72,25 @@ export function InvoiceActions({
     URL.revokeObjectURL(url)
   }
 
+  const handleShareWhatsApp = () => {
+    if (!invoice) return
+
+    // Format invoice details for WhatsApp
+    const itemsList = invoice.items
+      .map((item) => `${item.quantity}x ${item.product.name} - ₹${(item.product.price * item.quantity).toFixed(2)}`)
+      .join("\n")
+
+    const message = `*Invoice: ${invoice.invoiceNumber}*\n\n*Customer:* ${invoice.customer.name || "Walk-in"}\n*Mobile:* ${invoice.customer.mobile}\n\n*Items:*\n${itemsList}\n\n*Subtotal:* ₹${invoice.subtotal.toFixed(2)}\n*Tax:* ₹${invoice.tax.toFixed(2)}\n*Total:* ₹${invoice.total.toFixed(2)}\n\nThank you for shopping at nVoize!`
+
+    // Create WhatsApp share link
+    const phoneNumber = invoice.customer.mobile.replace(/\D/g, "")
+    const countryCode = "91" // India country code
+    const fullNumber = phoneNumber.startsWith("91") ? phoneNumber : countryCode + phoneNumber
+
+    const waLink = `https://wa.me/${fullNumber}?text=${encodeURIComponent(message)}`
+    window.open(waLink, "_blank")
+  }
+
   return (
     <div className="flex flex-col gap-2">
       {!invoice ? (
@@ -93,6 +112,14 @@ export function InvoiceActions({
           >
             <Printer className="mr-2 h-4 w-4" />
             Print Receipt
+          </Button>
+          <Button
+            size="lg"
+            className="w-full bg-green-600 text-white hover:bg-green-700"
+            onClick={handleShareWhatsApp}
+          >
+            <MessageCircle className="mr-2 h-4 w-4" />
+            Send via WhatsApp
           </Button>
           <Button size="lg" variant="outline" className="w-full bg-transparent" onClick={handleDownloadHTML}>
             <FileText className="mr-2 h-4 w-4" />
