@@ -43,7 +43,7 @@ export const AuthService = {
       const demoPassword = simpleHash("demo123", salt);
       const demoUser: User = {
         id: "user_demo_1",
-        email: "demo@shrim.com",
+        email: "demo@nvoize.com",
         password: `${demoPassword}:${salt}`,
         name: "Demo User",
         createdDate: new Date(),
@@ -199,6 +199,6 @@ export const AuthService = {
   verifySecurity(email: string, question: string, answer: string): boolean {
     // In production, store and verify security answers
     // For demo, we'll accept a simple verification
-    return answer.toLowerCase().includes("shrim");
+    return answer.toLowerCase().includes("nvoize");
   },
 };

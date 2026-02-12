@@ -80,7 +80,7 @@ export function InvoiceActions({
       .map((item) => `${item.quantity}x ${item.product.name} - ₹${(item.product.price * item.quantity).toFixed(2)}`)
       .join("\n")
 
-    const message = `*Invoice: ${invoice.invoiceNumber}*\n\n*Customer:* ${invoice.customer.name || "Walk-in"}\n*Mobile:* ${invoice.customer.mobile}\n\n*Items:*\n${itemsList}\n\n*Subtotal:* ₹${invoice.subtotal.toFixed(2)}\n*Tax:* ₹${invoice.tax.toFixed(2)}\n*Total:* ₹${invoice.total.toFixed(2)}\n\nThank you for shopping at Shrim Creation!`
+    const message = `*Invoice: ${invoice.invoiceNumber}*\n\n*Customer:* ${invoice.customer.name || "Walk-in"}\n*Mobile:* ${invoice.customer.mobile}\n\n*Items:*\n${itemsList}\n\n*Subtotal:* ₹${invoice.subtotal.toFixed(2)}\n*Tax:* ₹${invoice.tax.toFixed(2)}\n*Total:* ₹${invoice.total.toFixed(2)}\n\nThank you for shopping at nVoize!`
 
     // Create WhatsApp share link
     const phoneNumber = invoice.customer.mobile.replace(/\D/g, "")

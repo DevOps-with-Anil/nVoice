@@ -90,16 +90,16 @@ export function LoginPage() {
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <Image
-              src="/shrimlogo.png"
-              alt="Shrim Creation logo"
+              src="/nvoize-logo.png"
+              alt="nVoize logo"
               width={150}
-              height={60}
-              className="h-16 w-auto"
+              height={150}
+              className="h-32 w-auto"
               priority
             />
           </div>
-          <h1 className="text-2xl font-bold text-card-foreground">Shrim Creation POS</h1>
-          <p className="text-muted-foreground text-sm mt-1">Billing & Inventory Management</p>
+          <h1 className="text-2xl font-bold text-card-foreground">nVoize</h1>
+          <p className="text-muted-foreground text-sm mt-1">POS Billing & Inventory Management</p>
         </div>
 
         {/* Auth Tabs */}
@@ -176,7 +176,7 @@ export function LoginPage() {
                 {/* Demo credentials */}
                 <div className="pt-4 border-t border-border text-xs text-muted-foreground">
                   <p className="font-semibold mb-2">Demo Credentials:</p>
-                  <p>Email: <code className="bg-muted px-1 py-0.5 rounded">demo@shrim.com</code></p>
+                  <p>Email: <code className="bg-muted px-1 py-0.5 rounded">demo@nvoize.com</code></p>
                   <p>Password: <code className="bg-muted px-1 py-0.5 rounded">demo123</code></p>
                 </div>
               </form>
@@ -260,7 +260,7 @@ export function LoginPage() {
 
         {/* Footer */}
         <p className="text-center text-xs text-muted-foreground mt-6">
-          Shrim Creation © 2024 - All Rights Reserved
+          nVoize © 2024 - All Rights Reserved
         </p>
       </div>
     </div>

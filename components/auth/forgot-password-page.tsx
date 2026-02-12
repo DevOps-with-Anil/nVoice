@@ -111,11 +111,11 @@ export function ForgotPasswordPage({ onBack }: ForgotPasswordPageProps) {
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <Image
-              src="/shrimlogo.png"
-              alt="Shrim Creation logo"
+              src="/nvoize-logo.png"
+              alt="nVoize logo"
               width={150}
-              height={60}
-              className="h-16 w-auto"
+              height={150}
+              className="h-32 w-auto"
               priority
             />
           </div>
@@ -177,7 +177,7 @@ export function ForgotPasswordPage({ onBack }: ForgotPasswordPageProps) {
               <div className="space-y-2">
                 <Label className="font-semibold">What company do you work for?</Label>
                 <p className="text-xs text-muted-foreground mb-2">
-                  (Hint: It's Shrim Creation)
+                  (Hint: It's nVoize)
                 </p>
                 <Input
                   type="text"
@@ -274,7 +274,7 @@ export function ForgotPasswordPage({ onBack }: ForgotPasswordPageProps) {
 
         {/* Footer */}
         <p className="text-center text-xs text-muted-foreground mt-6">
-          Shrim Creation © 2024 - All Rights Reserved
+          nVoize © 2024 - All Rights Reserved
         </p>
       </div>
     </div>

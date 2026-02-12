@@ -56,39 +56,42 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg bg-card border border-border hover:bg-accent"
-      >
-        {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-      </button>
+      {/* Mobile Header Bar */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 h-16 bg-primary text-primary-foreground flex items-center justify-between px-4 border-b border-border">
+        <div className="font-bold text-lg">nVoize</div>
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="p-2 rounded-lg hover:bg-primary/80"
+        >
+          {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative inset-y-0 left-0 z-40 w-64 bg-card border-r border-border transform transition-transform duration-200 md:transform-none ${
+        className={`fixed md:relative inset-y-0 left-0 z-40 w-64 bg-primary text-primary-foreground transform transition-transform duration-200 md:transform-none md:mt-0 mt-16 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
-        <div className="p-4 flex flex-col h-full">
-          {/* Logo */}
-          <div className="mb-6 flex items-center gap-3">
+        <div className="p-6 flex flex-col h-full">
+          {/* Logo - Centered and Larger */}
+          <div className="mb-8 flex items-center justify-center">
             <Image
-              src="/shrimlogo.png"
-              alt="Shrim Creation"
-              width={100}
-              height={40}
-              className="h-10 w-auto"
+              src="/nvoize-logo.png"
+              alt="nVoize"
+              width={140}
+              height={140}
+              className="h-32 w-auto"
             />
           </div>
 
-          <Separator className="mb-4" />
+          <div className="h-px bg-primary-foreground/20 mb-6" />
 
           {/* User Info */}
-          <div className="mb-6 p-3 rounded-lg bg-accent/50">
-            <p className="text-xs text-muted-foreground">Logged in as</p>
-            <p className="font-semibold text-sm text-card-foreground">{user.name}</p>
-            <p className="text-xs text-muted-foreground">{user.email}</p>
+          <div className="mb-6 p-3 rounded-lg bg-primary-foreground/10">
+            <p className="text-xs text-primary-foreground/70">Logged in as</p>
+            <p className="font-semibold text-sm text-primary-foreground">{user.name}</p>
+            <p className="text-xs text-primary-foreground/70">{user.email}</p>
           </div>
 
           {/* Navigation */}
@@ -97,7 +100,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <Link key={item.href} href={item.href}>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start gap-3 text-muted-foreground hover:text-foreground hover:bg-accent"
+                  className="w-full justify-start gap-3 text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/15"
                   onClick={() => setSidebarOpen(false)}
                 >
                   <item.icon className="h-5 w-5" />
@@ -107,13 +110,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             ))}
           </nav>
 
-          <Separator className="mb-4" />
+          <div className="h-px bg-primary-foreground/20 mb-4" />
 
           {/* Logout Button */}
           <Button
             onClick={handleLogout}
-            variant="destructive"
-            className="w-full justify-start gap-3"
+            className="w-full justify-start gap-3 bg-primary-foreground text-primary hover:bg-primary-foreground/90"
           >
             <LogOut className="h-5 w-5" />
             Logout
@@ -122,7 +124,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto md:mt-0 mt-16">
         <div className="p-4 md:p-6">
           {/* Close sidebar on mobile when navigating */}
           <div onClick={() => setSidebarOpen(false)}>
