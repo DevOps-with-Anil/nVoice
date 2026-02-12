@@ -69,38 +69,38 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative inset-y-0 left-0 z-40 w-64 bg-primary text-primary-foreground transform transition-transform duration-200 md:transform-none md:mt-0 mt-16 ${
+        className={`fixed md:relative inset-y-0 left-0 z-40 w-64 bg-card border-r border-border transform transition-transform duration-200 md:transform-none md:mt-0 mt-16 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
-        <div className="p-6 flex flex-col h-full">
-          {/* Logo - Centered and Larger */}
-          <div className="mb-8 flex items-center justify-center">
+        <div className="p-4 flex flex-col h-full">
+          {/* Logo - Centered and Reduced Height */}
+          <div className="mb-4 flex items-center justify-center">
             <Image
               src="/nvoize-logo.png"
               alt="nVoize"
-              width={140}
-              height={140}
-              className="h-32 w-auto"
+              width={100}
+              height={100}
+              className="h-20 w-auto"
             />
           </div>
 
-          <div className="h-px bg-primary-foreground/20 mb-6" />
+          <div className="h-px bg-border mb-4" />
 
           {/* User Info */}
-          <div className="mb-6 p-3 rounded-lg bg-primary-foreground/10">
-            <p className="text-xs text-primary-foreground/70">Logged in as</p>
-            <p className="font-semibold text-sm text-primary-foreground">{user.name}</p>
-            <p className="text-xs text-primary-foreground/70">{user.email}</p>
+          <div className="mb-4 p-3 rounded-lg bg-muted">
+            <p className="text-xs text-muted-foreground">Logged in as</p>
+            <p className="font-semibold text-sm text-foreground">{user.name}</p>
+            <p className="text-xs text-muted-foreground">{user.email}</p>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 space-y-2">
+          <nav className="flex-1 space-y-1">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start gap-3 text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/15"
+                  className="w-full justify-start gap-3 text-muted-foreground hover:text-foreground hover:bg-accent"
                   onClick={() => setSidebarOpen(false)}
                 >
                   <item.icon className="h-5 w-5" />
@@ -110,12 +110,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             ))}
           </nav>
 
-          <div className="h-px bg-primary-foreground/20 mb-4" />
+          <div className="h-px bg-border mb-3" />
 
           {/* Logout Button */}
           <Button
             onClick={handleLogout}
-            className="w-full justify-start gap-3 bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+            variant="destructive"
+            className="w-full justify-start gap-3"
           >
             <LogOut className="h-5 w-5" />
             Logout
