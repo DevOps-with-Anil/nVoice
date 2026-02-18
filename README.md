@@ -1,1 +1,1 @@
-# nVoice
+# Welcome to nVoice POS
