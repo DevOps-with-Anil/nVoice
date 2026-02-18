@@ -260,7 +260,7 @@ export function LoginPage() {
 
         {/* Footer */}
         <p className="text-center text-xs text-muted-foreground mt-6">
-          nVoize © 2024 - All Rights Reserved
+          nVoize © 2026 - All Rights Reserved
         </p>
       </div>
     </div>
