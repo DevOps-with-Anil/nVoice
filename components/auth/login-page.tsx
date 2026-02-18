@@ -176,7 +176,7 @@ export function LoginPage() {
                 {/* Demo credentials */}
                 <div className="pt-4 border-t border-border text-xs text-muted-foreground">
                   <p className="font-semibold mb-2">Demo Credentials:</p>
-                  <p>Email: <code className="bg-muted px-1 py-0.5 rounded">demo@nvoize.com</code></p>
+                  <p>Email: <code className="bg-muted px-1 py-0.5 rounded">demo@nvoice.com</code></p>
                   <p>Password: <code className="bg-muted px-1 py-0.5 rounded">demo123</code></p>
                 </div>
               </form>
