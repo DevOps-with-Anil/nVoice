@@ -84,184 +84,192 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Logo and Header */}
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            <Image
-              src="/nvoize-logo.png"
-              alt="nVoize logo"
-              width={150}
-              height={150}
-              className="h-32 w-auto"
-              priority
-            />
+    <div className="h-screen overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 flex flex-col">
+      {/* Main container - uses flexbox to prevent scrolling */}
+      <div className="flex-1 flex items-center justify-center px-4 py-8">
+        <div className="w-full max-w-md flex flex-col max-h-full">
+          {/* Logo and Header */}
+          <div className="text-center mb-6 flex-shrink-0">
+            <div className="flex justify-center mb-3">
+              <Image
+                src="/nvoize-logo.png"
+                alt="nVoize logo"
+                width={150}
+                height={150}
+                className="h-24 w-auto"
+                priority
+              />
+            </div>
+            <h1 className="text-2xl font-bold text-card-foreground">nVoize</h1>
+            <p className="text-muted-foreground text-xs mt-1">POS Billing & Inventory Management</p>
           </div>
-          <h1 className="text-2xl font-bold text-card-foreground">nVoize</h1>
-          <p className="text-muted-foreground text-sm mt-1">POS Billing & Inventory Management</p>
-        </div>
 
-        {/* Auth Tabs */}
-        <div className="bg-card rounded-lg border border-border shadow-sm p-6">
-          <Tabs defaultValue="login" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="register">Create Account</TabsTrigger>
-            </TabsList>
+          {/* Auth Tabs - scrollable content area */}
+          <div className="bg-card rounded-lg border border-border shadow-sm p-5 flex-1 overflow-y-auto">
+            <Tabs defaultValue="login" className="w-full h-full flex flex-col">
+              <TabsList className="grid w-full grid-cols-2 mb-4 flex-shrink-0">
+                <TabsTrigger value="login" className="text-sm">Login</TabsTrigger>
+                <TabsTrigger value="register" className="text-sm">Create Account</TabsTrigger>
+              </TabsList>
 
-            {/* Login Tab */}
-            <TabsContent value="login">
-              <form onSubmit={handleLogin} className="space-y-4">
-                {loginError && (
-                  <Alert variant="destructive">
-                    <AlertDescription>{loginError}</AlertDescription>
-                  </Alert>
-                )}
-
-                <div className="space-y-2">
-                  <Label htmlFor="login-email">Email</Label>
-                  <Input
-                    id="login-email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={loginEmail}
-                    onChange={(e) => setLoginEmail(e.target.value)}
-                    disabled={loginLoading}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="login-password">Password</Label>
-                  <Input
-                    id="login-password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                    disabled={loginLoading}
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={loginLoading}
-                >
-                  {loginLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Logging in...
-                    </>
-                  ) : (
-                    "Login"
+              {/* Login Tab */}
+              <TabsContent value="login" className="flex-1 overflow-y-auto">
+                <form onSubmit={handleLogin} className="space-y-3">
+                  {loginError && (
+                    <Alert variant="destructive" className="py-2">
+                      <AlertDescription className="text-xs">{loginError}</AlertDescription>
+                    </Alert>
                   )}
-                </Button>
 
-                <div className="text-center">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="login-email" className="text-xs">Email</Label>
+                    <Input
+                      id="login-email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                      disabled={loginLoading}
+                      className="h-9 text-sm"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="login-password" className="text-xs">Password</Label>
+                    <Input
+                      id="login-password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={loginPassword}
+                      onChange={(e) => setLoginPassword(e.target.value)}
+                      disabled={loginLoading}
+                      className="h-9 text-sm"
+                    />
+                  </div>
+
                   <Button
-                    type="button"
-                    variant="link"
-                    className="text-sm"
-                    onClick={() => {
-                      // Handle forgot password navigation
-                      const event = new CustomEvent("navigateForgot");
-                      window.dispatchEvent(event);
-                    }}
+                    type="submit"
+                    className="w-full h-9 text-sm"
+                    disabled={loginLoading}
                   >
-                    Forgot Password?
+                    {loginLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
+                        Logging in...
+                      </>
+                    ) : (
+                      "Login"
+                    )}
                   </Button>
-                </div>
 
-                {/* Demo credentials */}
-                <div className="pt-4 border-t border-border text-xs text-muted-foreground">
-                  <p className="font-semibold mb-2">Demo Credentials:</p>
-                  <p>Email: <code className="bg-muted px-1 py-0.5 rounded">demo@nvoize.com</code></p>
-                  <p>Password: <code className="bg-muted px-1 py-0.5 rounded">demo123</code></p>
-                </div>
-              </form>
-            </TabsContent>
+                  <div className="text-center pt-2">
+                    <Button
+                      type="button"
+                      variant="link"
+                      className="text-xs h-auto py-1"
+                      onClick={() => {
+                        const event = new CustomEvent("navigateForgot");
+                        window.dispatchEvent(event);
+                      }}
+                    >
+                      Forgot Password?
+                    </Button>
+                  </div>
 
-            {/* Register Tab */}
-            <TabsContent value="register">
-              <form onSubmit={handleRegister} className="space-y-4">
-                {registerError && (
-                  <Alert variant="destructive">
-                    <AlertDescription>{registerError}</AlertDescription>
-                  </Alert>
-                )}
+                  {/* Demo credentials */}
+                  <div className="pt-3 border-t border-border text-xs text-muted-foreground space-y-1">
+                    <p className="font-semibold">Demo Credentials:</p>
+                    <p>Email: <code className="bg-muted px-1 py-0.5 rounded text-xs">demo@nvoice.com</code></p>
+                    <p>Password: <code className="bg-muted px-1 py-0.5 rounded text-xs">demo123</code></p>
+                  </div>
+                </form>
+              </TabsContent>
 
-                <div className="space-y-2">
-                  <Label htmlFor="register-name">Full Name</Label>
-                  <Input
-                    id="register-name"
-                    type="text"
-                    placeholder="John Doe"
-                    value={registerName}
-                    onChange={(e) => setRegisterName(e.target.value)}
-                    disabled={registerLoading}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="register-email">Email</Label>
-                  <Input
-                    id="register-email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={registerEmail}
-                    onChange={(e) => setRegisterEmail(e.target.value)}
-                    disabled={registerLoading}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="register-password">Password</Label>
-                  <Input
-                    id="register-password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={registerPassword}
-                    onChange={(e) => setRegisterPassword(e.target.value)}
-                    disabled={registerLoading}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="register-confirm">Confirm Password</Label>
-                  <Input
-                    id="register-confirm"
-                    type="password"
-                    placeholder="••••••••"
-                    value={registerConfirmPassword}
-                    onChange={(e) => setRegisterConfirmPassword(e.target.value)}
-                    disabled={registerLoading}
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={registerLoading}
-                >
-                  {registerLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Creating Account...
-                    </>
-                  ) : (
-                    "Create Account"
+              {/* Register Tab */}
+              <TabsContent value="register" className="flex-1 overflow-y-auto">
+                <form onSubmit={handleRegister} className="space-y-3">
+                  {registerError && (
+                    <Alert variant="destructive" className="py-2">
+                      <AlertDescription className="text-xs">{registerError}</AlertDescription>
+                    </Alert>
                   )}
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
-        </div>
 
-        {/* Footer */}
-        <p className="text-center text-xs text-muted-foreground mt-6">
-          nVoize © 2026 - All Rights Reserved
-        </p>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="register-name" className="text-xs">Full Name</Label>
+                    <Input
+                      id="register-name"
+                      type="text"
+                      placeholder="John Doe"
+                      value={registerName}
+                      onChange={(e) => setRegisterName(e.target.value)}
+                      disabled={registerLoading}
+                      className="h-9 text-sm"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="register-email" className="text-xs">Email</Label>
+                    <Input
+                      id="register-email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={registerEmail}
+                      onChange={(e) => setRegisterEmail(e.target.value)}
+                      disabled={registerLoading}
+                      className="h-9 text-sm"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="register-password" className="text-xs">Password</Label>
+                    <Input
+                      id="register-password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={registerPassword}
+                      onChange={(e) => setRegisterPassword(e.target.value)}
+                      disabled={registerLoading}
+                      className="h-9 text-sm"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="register-confirm" className="text-xs">Confirm Password</Label>
+                    <Input
+                      id="register-confirm"
+                      type="password"
+                      placeholder="••••••••"
+                      value={registerConfirmPassword}
+                      onChange={(e) => setRegisterConfirmPassword(e.target.value)}
+                      disabled={registerLoading}
+                      className="h-9 text-sm"
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full h-9 text-sm"
+                    disabled={registerLoading}
+                  >
+                    {registerLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
+                        Creating Account...
+                      </>
+                    ) : (
+                      "Create Account"
+                    )}
+                  </Button>
+                </form>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* Footer */}
+          <p className="text-center text-xs text-muted-foreground mt-4 flex-shrink-0">
+            nVoize © 2026 - All Rights Reserved
+          </p>
+        </div>
       </div>
     </div>
   );
